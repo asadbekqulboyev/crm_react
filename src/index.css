@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  background: #FAFAFA;
+  color: #253E5F;
+}
+a{text-decoration: none;}
+.status{
+ color: #F8FAFC;
+}
+.rotate_icon{
+  transition: all .2s linear;
+}
+.rotate{
+  transform: rotate(90deg);
+}
+.react-datepicker__tab-loop{
+  position: absolute;
+}
+.time{
+font-size: 24px;
+font-weight: 600;
+line-height: 32px;
+text-align: left;
+
+}
+.time .disablet{
+  color: #BBC3CD;
+}
+.sidebar_top{
+  height:calc(100vh - 70px);
+  overflow-y: auto;
+}
+.sidebar_top::-webkit-scrollbar{
+  display: none;
+}
+.react-datepicker__input-container div{
+  padding: 10px 16px 10px 24px;
+  border-radius: 8px;
+  background: #FAFAFA;
+  user-select: none;
+}
+.swiper {
+  max-width: calc(100% - 7.5px);
+}
+.btn{
+  cursor: pointer;
+}
+.right_main{
+  width: calc(100% - 293px);
+}
+.text_md{
+font-size: 40px;
+font-weight: 600;
+line-height: 56px;
+text-align: left;
+
+}

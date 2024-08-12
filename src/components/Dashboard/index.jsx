@@ -190,7 +190,15 @@ function Dashboard() {
             </Section>
             <Section>
                 <Flex contents={'between'}>
-                    <EmailList>
+                    <div className='left'>
+                    <Flex g={8} style={{alignItems:'center'}}>
+                        <SectionTitle>Email habarlari </SectionTitle> <Flex contents={'center'} style={{width:'28px',height:'28px',borderRadius:'50%',background:'#1890FF',color:'#fff',alignItems:'center'}}>12</Flex> 
+                    </Flex>
+                   
+                    <EmailList style={{marginTop:'16px'}}>
+                        <SectionTitle>
+                       
+                        </SectionTitle>
                         {emailj.map((email) => (
                             <EmailItem onClick={()=>Selecteds(email.id)
                             } key={email.id} selected={email.selected}>
@@ -207,7 +215,10 @@ function Dashboard() {
                             </EmailItem>
                         ))}
                     </EmailList>
-                    <FinanceSection>
+                    </div>
+                    <div className="right">
+                    <SectionTitle>Email habarlari</SectionTitle> 
+                       <FinanceSection style={{marginTop:'16px'}}>
                         <CalendarWrapper>
                             <Flex contents={'between'} g={15} style={{width:'100%',alignItems:'center'}}> <div className='swiper_prev btn'><PrevSlide /></div> <MonthYear>Fevral 2023</MonthYear> <div className='swiper_next btn'><NextSlide /></div></Flex>
                             
@@ -262,7 +273,9 @@ function Dashboard() {
                                 </LegendItem>
                             </Legend>
                         </CalendarWrapper>
-                    </FinanceSection>
+                    </FinanceSection> 
+                    </div>
+                    
                 </Flex>
 
             </Section>

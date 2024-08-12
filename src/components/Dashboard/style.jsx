@@ -50,7 +50,6 @@ export const EmailSection = styled.div`
 `;
 
 export const FinanceSection = styled.div`
-  width: calc(40% - 7.5px);
 
 `;
 
@@ -59,7 +58,6 @@ export const EmailList = styled.div`
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: calc(60% - 7.5px);
 `;
 
 export const EmailItem = styled.label`

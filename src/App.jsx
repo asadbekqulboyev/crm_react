@@ -98,14 +98,14 @@ function App() {
   ]
   const [info, setInfo] = useState(() => {
     const savedInfo = localStorage.getItem('info');
+    console.log('Loaded from localStorage:', savedInfo);
     return savedInfo ? JSON.parse(savedInfo) : data;
   });
 
-  useEffect(() => {
-  localStorage.setItem('info', JSON.stringify(data))
-   
+  // useEffect(() => {
     
-  }, [info]);
+  //   localStorage.setItem('info', JSON.stringify(info));
+  // }, [info]);
 
   const Toggle = (id) => {
     const updatedInfo = info.map(item =>

@@ -42,9 +42,12 @@ const Tabble = () => {
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
   const getData = () => {
+    setLoad(true);
     fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc")
       .then((res) => res.json())
       .then((res) => setData(res));
+    setLoad(false);
+
   };
 
   const onChange = (event) => {
@@ -55,7 +58,7 @@ const Tabble = () => {
     });
   };
   const onAdd = () => {
-    setLoad(true);
+     setLoad(true);
     fetch(
       "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc",
       {
@@ -66,12 +69,18 @@ const Tabble = () => {
         body: JSON.stringify({ ...input, id: Date.now() }),
       }
     ).then(() => getData());
-    setLoad(false);
     closeModal();
+     setLoad(false);
   };
+  const onDelete = ()=>{
+
+  }
   useEffect(() => {
+    setLoad(false);
+
     getData();
   }, []);
+
   return (
     <Container>
       <Header>

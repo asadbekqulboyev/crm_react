@@ -16,8 +16,6 @@ import {
 import { Flex } from "../Sidebar/sidebarStyle";
 import OrderModal from "./Modal";
 import { Title } from "../Dashboard/style";
-import { Input } from "react-select/animated";
-
 const Tabble = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
@@ -43,12 +41,11 @@ const Tabble = () => {
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
-  const getData = ()=>{
-fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc")
-  .then((res) => res.json())
-  .then((res) => setData(res));
-  data.length > 0 ? setLoad(true) : setLoad(false);
-  }
+  const getData = () => {
+    fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc")
+      .then((res) => res.json())
+      .then((res) => setData(res));
+  };
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -58,24 +55,22 @@ fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc")
     });
   };
   const onAdd = () => {
+    setLoad(true);
     fetch(
       "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc",
       {
         method: "POST",
         headers: {
-          "Content-Type": "aplication/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({input}),
+        body: JSON.stringify({ ...input, id: Date.now() }),
       }
-    ).then(
-      ()=>getData()
-    )
-    console.log(input);
-    
+    ).then(() => getData());
+    setLoad(false);
+    closeModal();
   };
   useEffect(() => {
-    getData()
-    
+    getData();
   }, []);
   return (
     <Container>
@@ -110,6 +105,10 @@ fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc")
           </thead>
           <tbody>
             {load ? (
+              <Loader>
+                <img src="https://i.gifer.com/ZKZg.gif" alt="Load" />
+              </Loader>
+            ) : (
               data.map((dateInfo) => {
                 return (
                   <TableRow>
@@ -130,10 +129,6 @@ fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc")
                   </TableRow>
                 );
               })
-            ) : (
-              <Loader>
-                <img src="https://i.gifer.com/ZKZg.gif" alt="Load" />
-              </Loader>
             )}
           </tbody>
         </Table>

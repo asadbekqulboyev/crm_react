@@ -11,15 +11,15 @@ import {
 } from "./components/Sidebar/sidebarStyle";
 import logo from "./assets/images/Webbrain.crm.svg";
 import userImgs from "./assets/images/user_img.png";
-// import Analystic from "./assets/images/a1.svg";
-// import Buyurtma from "./assets/images/a2.svg";
-// import Moliya from "./assets/images/a3.svg";
-// import Talaba from "./assets/images/a4.svg";
-// import Guruhlar from "./assets/images/a5.svg";
-// import Kurslar from "./assets/images/a6.svg";
-// import HR from "./assets/images/a7.svg";
-// import Sozlamalar from "./assets/images/a8.svg";
-import Chiqish from "./assets/images/a9.svg";
+import Analystic from "./assets/images/a1.svg";
+import Buyurtma from "./assets/images/a2.svg";
+import Moliya from "./assets/images/a3.svg";
+import Talaba from "./assets/images/a4.svg";
+import Guruhlar from "./assets/images/a5.svg";
+import Kurslar from "./assets/images/a6.svg";
+import HR from "./assets/images/a7.svg";
+import Sozlamalar from "./assets/images/a8.svg";
+import chiqish from "./assets/images/a9.svg";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import { useState, useEffect } from "react";
@@ -31,13 +31,13 @@ function App() {
     {
       id: 1,
       title: "Anlitika",
-      icon: "./src/assets/images/a1.svg",
+      icon: Analystic,
       isOpen: false,
     },
     {
       id: 2,
       title: "Buyurtma",
-      icon: "./src/assets/images/a2.svg",
+      icon: Buyurtma,
       isOpen: false,
       ChildLink: [
         { id: 1, title: "Buyurtmalar ro’yxati", url: "/table" },
@@ -48,13 +48,13 @@ function App() {
     {
       id: 3,
       title: "Moliya",
-      icon: "./src/assets/images/a3.svg",
+      icon: Moliya,
       isOpen: false,
     },
     {
       id: 4,
       title: "Talaba",
-      icon: "./src/assets/images/a4.svg",
+      icon: Talaba,
       isOpen: false,
       ChildLink: [
         { id: 1, title: "Davomat", url: "" },
@@ -67,7 +67,7 @@ function App() {
     {
       id: 5,
       title: "Guruhlar",
-      icon: "./src/assets/images/a5.svg",
+      icon: Guruhlar,
       isOpen: false,
       ChildLink: [
         { id: 1, title: "Guruhlar", url: "" },
@@ -78,7 +78,7 @@ function App() {
     {
       id: 6,
       title: "Kurslar",
-      icon: "./src/assets/images/a6.svg",
+      icon: Kurslar,
       isOpen: false,
       ChildLink: [
         { id: 1, title: "Kurslar ro’yxati", url: "" },
@@ -88,7 +88,7 @@ function App() {
     {
       id: 7,
       title: "HR",
-      icon: "./src/assets/images/a7.svg",
+      icon: HR,
       isOpen: false,
       ChildLink: [
         { id: 1, title: "Ro’llar", url: "" },
@@ -98,7 +98,7 @@ function App() {
     {
       id: 8,
       title: "Sozlamalar",
-      icon: "./src/assets/images/a8.svg",
+      icon: Sozlamalar,
       isOpen: false,
       ChildLink: [
         { id: 1, title: "Umumiy sozlamalar", url: "" },
@@ -208,8 +208,7 @@ function App() {
               <Flex>
                 <Flex g={16}>
                   <div className="icon">
-                    <img src="./assets/images/a9.svg" alt="" />
-                    {/* <Chiqish /> */}
+                    <img src={chiqish} alt="jhgdzsg" />
                   </div>
                   <span>Chiqish</span>
                 </Flex>

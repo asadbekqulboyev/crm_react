@@ -20,7 +20,7 @@ const Tabble = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
   const [input, setInput] = useState({
-    ism: "vbsdgbrtgrtg",
+    ism: "",
     title: "",
     field: "",
     level: "",
@@ -45,8 +45,10 @@ const Tabble = () => {
     setLoad(true);
     fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc")
       .then((res) => res.json())
-      .then((res) => setData(res));
-    setLoad(false);
+      .then((res) => {
+        setData(res);
+        setLoad(false);
+      });
 
   };
 
@@ -58,23 +60,47 @@ const Tabble = () => {
     });
   };
   const onAdd = () => {
-     setLoad(true);
-    fetch(
-      "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...input, id: Date.now() }),
-      }
-    ).then(() => getData());
-    closeModal();
+ setLoad(true);
+ fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc", {
+   method: "POST",
+   headers: {
+     "Content-Type": "application/json",
+   },
+   body: JSON.stringify({ ...input, id: Date.now() }),
+ })
+   .then(() => {
+     getData();
+     closeModal();
+   })
+   .finally(() => {
      setLoad(false);
+   });
   };
-  const onDelete = ()=>{
+//  const onDelete = (id) => {
+//    setLoad(true);
+//    fetch(
+//      `https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc/${id}`,
+//      {
+//        method: "DELETE",
+//        headers: {
+//          "Content-Type": "application/json",
+//        },
+//      }
+//    )
+//      .then(() => {
+//        getData();
+//        closeModal();
+//      })
+//      .catch((error) => {
+//        console.error("Error deleting data:", error);
+//      })
+//      .finally(() => {
+//        setLoad(false);
+//      });
 
-  }
+//    console.log(id);
+//  };
+
   useEffect(() => {
     setLoad(false);
 
@@ -120,7 +146,7 @@ const Tabble = () => {
             ) : (
               data.map((dateInfo) => {
                 return (
-                  <TableRow>
+                  <TableRow key={dateInfo.id}>
                     <TableCell>{dateInfo.id}</TableCell>
                     <TableCell>{dateInfo.ism}</TableCell>
                     <TableCell>{dateInfo.field}</TableCell>
@@ -131,7 +157,7 @@ const Tabble = () => {
                       <IconButton>
                         <FaEdit />
                       </IconButton>
-                      <IconButton>
+                      <IconButton onClick={()=>onDelete(dateInfo.id)}>
                         <FaTrash />
                       </IconButton>
                     </TableCell>

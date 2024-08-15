@@ -76,30 +76,30 @@ const Tabble = () => {
      setLoad(false);
    });
   };
-//  const onDelete = (id) => {
-//    setLoad(true);
-//    fetch(
-//      `https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc/${id}`,
-//      {
-//        method: "DELETE",
-//        headers: {
-//          "Content-Type": "application/json",
-//        },
-//      }
-//    )
-//      .then(() => {
-//        getData();
-//        closeModal();
-//      })
-//      .catch((error) => {
-//        console.error("Error deleting data:", error);
-//      })
-//      .finally(() => {
-//        setLoad(false);
-//      });
+ const onDelete = (id) => {
+   setLoad(true);
+   fetch(
+     `https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc/id/*${id}*`,
+     {
+       method: "DELETE",
+       headers: {
+         "Content-Type": "application/json",
+       },
+     }
+   )
+     .then(() => {
+       getData();
+       closeModal();
+     })
+     .catch((error) => {
+       console.error("Error deleting data:", error);
+     })
+     .finally(() => {
+       setLoad(false);
+     });
 
-//    console.log(id);
-//  };
+   console.log(id);
+ };
 
   useEffect(() => {
     setLoad(false);

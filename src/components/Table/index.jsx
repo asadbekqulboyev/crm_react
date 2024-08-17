@@ -54,6 +54,8 @@ const Tabble = () => {
 
   const onChange = (event) => {
     const { value, name } = event.target;
+    console.log(value);
+    
     setInput({
       ...input,
       [name]: value,
@@ -107,6 +109,9 @@ const Tabble = () => {
     getData();
   }, []);
 
+  const onUpdate = ()=>{
+    openModal()
+  }
   return (
     <Container>
       <Header>
@@ -154,7 +159,7 @@ const Tabble = () => {
                     <TableCell>{dateInfo.end_data}</TableCell>
                     <TableCell>{dateInfo.mentor}</TableCell>
                     <TableCell>
-                      <IconButton>
+                      <IconButton onClick={()=>onUpdate()}>
                         <FaEdit />
                       </IconButton>
                       <IconButton onClick={()=>onDelete(dateInfo.id)}>

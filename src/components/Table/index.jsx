@@ -61,23 +61,45 @@ const Tabble = () => {
       [name]: value,
     });
   };
-  const onAdd = () => {
- setLoad(true);
- fetch("https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc", {
-   method: "POST",
-   headers: {
-     "Content-Type": "application/json",
-   },
-   body: JSON.stringify({ ...input, id: Date.now() }),
- })
-   .then(() => {
-     getData();
-     closeModal();
-   })
-   .finally(() => {
-     setLoad(false);
-   });
-  };
+const onAdd = async () => {
+  setLoad(true);
+
+  try {
+    // Avvalgi ma'lumotlarni olib kelish
+    const response = await fetch(
+      "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc"
+    );
+    const data = await response.json();
+
+    // Eng katta id ni topish
+    const maxId = data.reduce(
+      (max, item) => (item.id > max ? item.id : max),
+      0
+    );
+    const newId = maxId + 1;
+
+    // Yangi ma'lumotni jo'natish
+    await fetch(
+      "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...input, id: newId }),
+      }
+    );
+
+    // Yangi ma'lumotni olib kelish
+    getData();
+    closeModal();
+  } catch (error) {
+    console.error("Error adding data:", error);
+  } finally {
+    setLoad(false);
+  }
+};
+
  const onDelete = (id) => {
    setLoad(true);
    fetch(

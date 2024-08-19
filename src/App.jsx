@@ -41,7 +41,7 @@ function App() {
       isOpen: false,
       ChildLink: [
         { id: 1, title: "Buyurtmalar ro’yxati", url: "/table" },
-        { id: 2, title: "Birinchi darsga yozilish", url: "" },
+        { id: 2, title: "Birinchi darsga yozilish", url: "/yozilish" },
         { id: 3, title: "Yangi talabalar ro’yxati", url: "" },
       ],
     },
@@ -219,6 +219,7 @@ function App() {
         <Flex column="true" className="right_main">
           <Routes>
             <Route path="/table" element={<Tabble />} />
+            <Route path="/yozilish" element={<Tabble />} />
             <Route path="/" element={<Dashboard />} />
           </Routes>
           <Header />

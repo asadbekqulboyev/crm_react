@@ -49,81 +49,80 @@ const Tabble = () => {
         setData(res);
         setLoad(false);
       });
-
   };
 
   const onChange = (event) => {
     const { value, name } = event.target;
     console.log(value);
-    
+
     setInput({
       ...input,
       [name]: value,
     });
   };
-const onAdd = async () => {
-  setLoad(true);
+  const onAdd = async () => {
+    setLoad(true);
 
-  try {
-    // Avvalgi ma'lumotlarni olib kelish
-    const response = await fetch(
-      "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc"
-    );
-    const data = await response.json();
+    try {
+      // Avvalgi ma'lumotlarni olib kelish
+      const response = await fetch(
+        "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc"
+      );
+      const data = await response.json();
 
-    // Eng katta id ni topish
-    const maxId = data.reduce(
-      (max, item) => (item.id > max ? item.id : max),
-      0
-    );
-    const newId = maxId + 1;
+      // Eng katta id ni topish
+      const maxId = data.reduce(
+        (max, item) => (item.id > max ? item.id : max),
+        0
+      );
+      const newId = maxId + 1;
 
-    // Yangi ma'lumotni jo'natish
-    await fetch(
-      "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc",
+      // Yangi ma'lumotni jo'natish
+      await fetch(
+        "https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...input, id: newId }),
+        }
+      );
+
+      // Yangi ma'lumotni olib kelish
+      getData();
+      closeModal();
+    } catch (error) {
+      console.error("Error adding data:", error);
+    } finally {
+      setLoad(false);
+    }
+  };
+
+  const onDelete = (id) => {
+    setLoad(true);
+    fetch(
+      `https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc/id/*${id}*`,
       {
-        method: "POST",
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...input, id: newId }),
       }
-    );
+    )
+      .then(() => {
+        getData();
+        closeModal();
+      })
+      .catch((error) => {
+        console.error("Error deleting data:", error);
+      })
+      .finally(() => {
+        setLoad(false);
+      });
 
-    // Yangi ma'lumotni olib kelish
-    getData();
-    closeModal();
-  } catch (error) {
-    console.error("Error adding data:", error);
-  } finally {
-    setLoad(false);
-  }
-};
-
- const onDelete = (id) => {
-   setLoad(true);
-   fetch(
-     `https://sheet.best/api/sheets/423f9106-6b8e-41c1-811c-529329a327bc/id/*${id}*`,
-     {
-       method: "DELETE",
-       headers: {
-         "Content-Type": "application/json",
-       },
-     }
-   )
-     .then(() => {
-       getData();
-       closeModal();
-     })
-     .catch((error) => {
-       console.error("Error deleting data:", error);
-     })
-     .finally(() => {
-       setLoad(false);
-     });
-
-   console.log(id);
- };
+    console.log(id);
+  };
 
   useEffect(() => {
     setLoad(false);
@@ -131,9 +130,12 @@ const onAdd = async () => {
     getData();
   }, []);
 
-  const onUpdate = ()=>{
-    openModal()
-  }
+  const onUpdate = (id) => {
+    openModal();
+    setInput({
+      ...id,
+    });
+  };
   return (
     <Container>
       <Header>
@@ -181,10 +183,10 @@ const onAdd = async () => {
                     <TableCell>{dateInfo.end_data}</TableCell>
                     <TableCell>{dateInfo.mentor}</TableCell>
                     <TableCell>
-                      <IconButton onClick={()=>onUpdate()}>
+                      <IconButton onClick={() => onUpdate(dateInfo)}>
                         <FaEdit />
                       </IconButton>
-                      <IconButton onClick={()=>onDelete(dateInfo.id)}>
+                      <IconButton onClick={() => onDelete(dateInfo.id)}>
                         <FaTrash />
                       </IconButton>
                     </TableCell>

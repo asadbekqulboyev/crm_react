@@ -14,6 +14,8 @@ import {
 } from './style';
 const OrderModal = ({ isOpen, onClose, input, onChange, onAdd }) => {
   if (!isOpen) return null;
+  
+  
   return (
     <ModalOverlay>
       <ModalContainer>
